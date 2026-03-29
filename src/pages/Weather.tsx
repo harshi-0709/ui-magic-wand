@@ -81,11 +81,11 @@ const Weather = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <span className="text-8xl md:text-9xl font-extralight text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+          <span className="text-8xl md:text-9xl font-extralight" style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--foreground))" }}>
             {Math.round(weather.main.temp)}
           </span>
-          <span className="text-3xl font-light text-white/60 align-top ml-1">°</span>
-          <p className="text-sm mt-2 capitalize tracking-wide" style={{ color: "hsla(0, 0%, 100%, 0.7)" }}>
+          <span className="text-3xl font-light align-top ml-1" style={{ color: "hsl(var(--muted-foreground))" }}>°</span>
+          <p className="text-sm mt-2 capitalize tracking-wide" style={{ color: "hsl(var(--muted-foreground))" }}>
             {weather.weather[0].description}
           </p>
         </motion.div>
