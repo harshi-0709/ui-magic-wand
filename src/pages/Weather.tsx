@@ -33,9 +33,9 @@ const Weather = () => {
         onClick={() => navigate("/")}
         className="fixed top-6 left-6 z-20 p-2.5 rounded-full"
         style={{
-          background: "hsla(0, 0%, 100%, 0.15)",
+          background: "hsla(0, 0%, 0%, 0.06)",
           backdropFilter: "blur(10px)",
-          color: "white",
+          color: "hsl(var(--foreground))",
         }}
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -47,12 +47,12 @@ const Weather = () => {
       {/* Weather card */}
       <motion.div
         className="relative z-10 w-full max-w-md rounded-3xl p-8 md:p-10"
-        style={{
-          background: "hsla(0, 0%, 100%, 0.12)",
-          backdropFilter: "blur(24px)",
-          border: "1px solid hsla(0, 0%, 100%, 0.2)",
-          boxShadow: "0 25px 50px -12px hsla(0, 0%, 0%, 0.15)",
-        }}
+         style={{
+           background: "hsla(0, 0%, 100%, 0.55)",
+           backdropFilter: "blur(24px)",
+           border: "1px solid hsla(0, 0%, 0%, 0.08)",
+           boxShadow: "0 25px 50px -12px hsla(0, 0%, 0%, 0.08)",
+         }}
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -60,15 +60,15 @@ const Weather = () => {
         {/* City & Country */}
         <div className="text-center mb-6">
           <motion.h1
-            className="text-3xl md:text-4xl font-light tracking-wide text-white"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            className="text-3xl md:text-4xl font-light tracking-wide"
+             style={{ color: "hsl(var(--foreground))", fontFamily: "'Cormorant Garamond', serif" }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
             {weather.name}
           </motion.h1>
-          <p className="text-sm tracking-[0.2em] uppercase mt-1" style={{ color: "hsla(0, 0%, 100%, 0.6)" }}>
+          <p className="text-sm tracking-[0.2em] uppercase mt-1" style={{ color: "hsl(var(--muted-foreground))" }}>
             {weather.sys.country}
           </p>
         </div>
@@ -80,11 +80,11 @@ const Weather = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <span className="text-8xl md:text-9xl font-extralight text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+          <span className="text-8xl md:text-9xl font-extralight" style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--foreground))" }}>
             {Math.round(weather.main.temp)}
           </span>
-          <span className="text-3xl font-light text-white/60 align-top ml-1">°</span>
-          <p className="text-sm mt-2 capitalize tracking-wide" style={{ color: "hsla(0, 0%, 100%, 0.7)" }}>
+          <span className="text-3xl font-light align-top ml-1" style={{ color: "hsl(var(--muted-foreground))" }}>°</span>
+          <p className="text-sm mt-2 capitalize tracking-wide" style={{ color: "hsl(var(--muted-foreground))" }}>
             {weather.weather[0].description}
           </p>
         </motion.div>
@@ -92,7 +92,7 @@ const Weather = () => {
         {/* Feels like + Hi/Lo */}
         <motion.div
           className="flex justify-center gap-6 mb-8 text-sm"
-          style={{ color: "hsla(0, 0%, 100%, 0.6)" }}
+          style={{ color: "hsl(var(--muted-foreground))" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -108,7 +108,7 @@ const Weather = () => {
         </motion.div>
 
         {/* Divider */}
-        <div className="w-full h-px mb-6" style={{ background: "hsla(0, 0%, 100%, 0.15)" }} />
+        <div className="w-full h-px mb-6" style={{ background: "hsla(0, 0%, 0%, 0.08)" }} />
 
         {/* Details grid */}
         <motion.div
@@ -131,13 +131,13 @@ const DetailItem = ({ icon, label, value }: { icon: React.ReactNode; label: stri
   <div className="flex items-center gap-3">
     <div
       className="p-2 rounded-xl"
-      style={{ background: "hsla(0, 0%, 100%, 0.1)" }}
+      style={{ background: "hsla(0, 0%, 0%, 0.04)" }}
     >
-      <span style={{ color: "hsla(0, 0%, 100%, 0.7)" }}>{icon}</span>
+      <span style={{ color: "hsl(var(--muted-foreground))" }}>{icon}</span>
     </div>
     <div>
-      <p className="text-xs tracking-wide" style={{ color: "hsla(0, 0%, 100%, 0.5)" }}>{label}</p>
-      <p className="text-sm font-medium text-white">{value}</p>
+      <p className="text-xs tracking-wide" style={{ color: "hsl(var(--muted-foreground))" }}>{label}</p>
+      <p className="text-sm font-medium" style={{ color: "hsl(var(--foreground))" }}>{value}</p>
     </div>
   </div>
 );
