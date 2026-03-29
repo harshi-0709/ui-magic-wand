@@ -93,7 +93,7 @@ const Weather = () => {
         {/* Feels like + Hi/Lo */}
         <motion.div
           className="flex justify-center gap-6 mb-8 text-sm"
-          style={{ color: "hsla(0, 0%, 100%, 0.6)" }}
+          style={{ color: "hsl(var(--muted-foreground))" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
