@@ -132,13 +132,13 @@ const DetailItem = ({ icon, label, value }: { icon: React.ReactNode; label: stri
   <div className="flex items-center gap-3">
     <div
       className="p-2 rounded-xl"
-      style={{ background: "hsla(0, 0%, 100%, 0.1)" }}
+      style={{ background: "hsla(0, 0%, 0%, 0.04)" }}
     >
-      <span style={{ color: "hsla(0, 0%, 100%, 0.7)" }}>{icon}</span>
+      <span style={{ color: "hsl(var(--muted-foreground))" }}>{icon}</span>
     </div>
     <div>
-      <p className="text-xs tracking-wide" style={{ color: "hsla(0, 0%, 100%, 0.5)" }}>{label}</p>
-      <p className="text-sm font-medium text-white">{value}</p>
+      <p className="text-xs tracking-wide" style={{ color: "hsl(var(--muted-foreground))" }}>{label}</p>
+      <p className="text-sm font-medium" style={{ color: "hsl(var(--foreground))" }}>{value}</p>
     </div>
   </div>
 );
