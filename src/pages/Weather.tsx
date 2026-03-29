@@ -60,7 +60,8 @@ const Weather = () => {
         {/* City & Country */}
         <div className="text-center mb-6">
           <motion.h1
-            className="text-3xl md:text-4xl font-light tracking-wide text-white"
+            className="text-3xl md:text-4xl font-light tracking-wide"
+             style={{ color: "hsl(var(--foreground))" }}
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
