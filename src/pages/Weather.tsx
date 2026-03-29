@@ -33,9 +33,9 @@ const Weather = () => {
         onClick={() => navigate("/")}
         className="fixed top-6 left-6 z-20 p-2.5 rounded-full"
         style={{
-          background: "hsla(0, 0%, 100%, 0.15)",
+          background: "hsla(0, 0%, 0%, 0.06)",
           backdropFilter: "blur(10px)",
-          color: "white",
+          color: "hsl(var(--foreground))",
         }}
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
