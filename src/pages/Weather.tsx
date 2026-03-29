@@ -69,7 +69,7 @@ const Weather = () => {
           >
             {weather.name}
           </motion.h1>
-          <p className="text-sm tracking-[0.2em] uppercase mt-1" style={{ color: "hsla(0, 0%, 100%, 0.6)" }}>
+          <p className="text-sm tracking-[0.2em] uppercase mt-1" style={{ color: "hsl(var(--muted-foreground))" }}>
             {weather.sys.country}
           </p>
         </div>
