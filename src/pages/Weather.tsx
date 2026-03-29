@@ -47,12 +47,12 @@ const Weather = () => {
       {/* Weather card */}
       <motion.div
         className="relative z-10 w-full max-w-md rounded-3xl p-8 md:p-10"
-        style={{
-          background: "hsla(0, 0%, 100%, 0.12)",
-          backdropFilter: "blur(24px)",
-          border: "1px solid hsla(0, 0%, 100%, 0.2)",
-          boxShadow: "0 25px 50px -12px hsla(0, 0%, 0%, 0.15)",
-        }}
+         style={{
+           background: "hsla(0, 0%, 100%, 0.55)",
+           backdropFilter: "blur(24px)",
+           border: "1px solid hsla(0, 0%, 0%, 0.08)",
+           boxShadow: "0 25px 50px -12px hsla(0, 0%, 0%, 0.08)",
+         }}
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
