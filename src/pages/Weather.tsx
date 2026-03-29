@@ -109,7 +109,7 @@ const Weather = () => {
         </motion.div>
 
         {/* Divider */}
-        <div className="w-full h-px mb-6" style={{ background: "hsla(0, 0%, 100%, 0.15)" }} />
+        <div className="w-full h-px mb-6" style={{ background: "hsla(0, 0%, 0%, 0.08)" }} />
 
         {/* Details grid */}
         <motion.div
