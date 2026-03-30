@@ -8,6 +8,15 @@ export interface WeatherData {
   weather: { description: string; icon: string; main: string }[];
   wind: { speed: number };
   visibility: number;
+  timezone: number; // offset in seconds from UTC
+}
+
+export function isNightTime(data: WeatherData): boolean {
+  const nowUtc = Math.floor(Date.now() / 1000);
+  const localNow = nowUtc + data.timezone;
+  const localSunrise = data.sys.sunrise + data.timezone;
+  const localSunset = data.sys.sunset + data.timezone;
+  return localNow < localSunrise || localNow > localSunset;
 }
 
 export async function fetchWeatherByCity(city: string): Promise<WeatherData> {
