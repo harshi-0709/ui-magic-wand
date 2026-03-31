@@ -33,86 +33,90 @@ const AnimatedMoon = () => {
         style={{
           width: "280px",
           height: "280px",
-          background: "radial-gradient(circle, hsla(220, 40%, 85%, 0.2) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsla(38, 80%, 55%, 0.15) 0%, transparent 70%)",
         }}
         animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.7, 0.4] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Moon body */}
-      <div
-        className="relative z-10 w-40 h-40 md:w-52 md:h-52 rounded-full flex items-center justify-center"
-        style={{
-          background: "radial-gradient(circle at 40% 35%, hsl(220 25% 90%), hsl(225 20% 82%), hsl(230 18% 75%))",
-          boxShadow: "0 0 60px 20px hsla(220, 30%, 80%, 0.25), 0 0 120px 60px hsla(220, 30%, 80%, 0.1)",
-        }}
+      {/* Crescent Moon with face - classic style */}
+      <motion.svg
+        viewBox="0 0 200 200"
+        className="w-44 h-44 md:w-56 md:h-56 relative z-10"
+        animate={{ rotate: [0, 2, -2, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       >
-        {/* Craters */}
-        <div
-          className="absolute rounded-full"
-          style={{ width: 18, height: 18, top: "22%", left: "25%", background: "hsl(225 15% 72%)", opacity: 0.3 }}
+        <defs>
+          <clipPath id="crescentClip">
+            {/* Main circle minus inner circle to create crescent */}
+            <path d="M 100,10 A 90,90 0 1,1 100,190 A 90,90 0 1,1 100,10 Z" />
+          </clipPath>
+          <mask id="crescentMask">
+            <rect width="200" height="200" fill="white" />
+            {/* Cut out the inner circle to form the crescent */}
+            <circle cx="130" cy="85" r="72" fill="black" />
+          </mask>
+          <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(38, 75%, 60%)" />
+            <stop offset="50%" stopColor="hsl(35, 80%, 55%)" />
+            <stop offset="100%" stopColor="hsl(30, 70%, 48%)" />
+          </linearGradient>
+        </defs>
+
+        {/* Crescent body */}
+        <circle cx="100" cy="100" r="90" fill="url(#moonGrad)" mask="url(#crescentMask)" />
+
+        {/* Outline for the crescent */}
+        <circle
+          cx="100" cy="100" r="90"
+          fill="none" stroke="hsl(25, 60%, 35%)" strokeWidth="2"
+          mask="url(#crescentMask)"
         />
-        <div
-          className="absolute rounded-full"
-          style={{ width: 12, height: 12, top: "60%", left: "65%", background: "hsl(225 15% 72%)", opacity: 0.25 }}
+
+        {/* Face elements - positioned on the crescent's visible area */}
+        {/* Eye - closed, with lashes */}
+        <motion.path
+          d="M 62 80 Q 68 76, 74 80"
+          fill="none" stroke="hsl(25, 50%, 30%)" strokeWidth="2" strokeLinecap="round"
+          animate={{ d: ["M 62 80 Q 68 76, 74 80", "M 62 79 Q 68 74, 74 79", "M 62 80 Q 68 76, 74 80"] }}
+          transition={{ duration: 4, repeat: Infinity }}
         />
-        <div
-          className="absolute rounded-full"
-          style={{ width: 8, height: 8, top: "35%", left: "70%", background: "hsl(225 15% 72%)", opacity: 0.2 }}
+        {/* Eyelashes */}
+        <line x1="63" y1="79" x2="60" y2="75" stroke="hsl(25, 50%, 30%)" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="66" y1="77" x2="64" y2="73" stroke="hsl(25, 50%, 30%)" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="70" y1="77" x2="69" y2="73" stroke="hsl(25, 50%, 30%)" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="73" y1="79" x2="75" y2="75" stroke="hsl(25, 50%, 30%)" strokeWidth="1.2" strokeLinecap="round" />
+
+        {/* Eyebrow */}
+        <path
+          d="M 58 72 Q 67 66, 76 72"
+          fill="none" stroke="hsl(25, 50%, 30%)" strokeWidth="1.5" strokeLinecap="round"
         />
 
-        {/* Face */}
-        <svg viewBox="0 0 120 120" className="w-28 h-28 md:w-36 md:h-36 relative z-10">
-          {/* Left eye - open */}
-          <ellipse cx="42" cy="48" rx="7" ry="8" fill="hsl(230 20% 25%)" opacity={0.7} />
-          <ellipse cx="43" cy="46" rx="3" ry="3.5" fill="hsl(220 30% 90%)" opacity={0.9} />
-          <motion.ellipse
-            cx="44" cy="45" rx="1.5" ry="1.5"
-            fill="white" opacity={0.8}
-            animate={{ cy: [44, 45, 44] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
+        {/* Nose */}
+        <path
+          d="M 72 90 Q 78 96, 74 102 Q 70 104, 68 102"
+          fill="none" stroke="hsl(25, 50%, 30%)" strokeWidth="1.8" strokeLinecap="round"
+        />
 
-          {/* Right eye - open */}
-          <ellipse cx="78" cy="48" rx="7" ry="8" fill="hsl(230 20% 25%)" opacity={0.7} />
-          <ellipse cx="79" cy="46" rx="3" ry="3.5" fill="hsl(220 30% 90%)" opacity={0.9} />
-          <motion.ellipse
-            cx="80" cy="45" rx="1.5" ry="1.5"
-            fill="white" opacity={0.8}
-            animate={{ cy: [44, 45, 44] }}
-            transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-          />
+        {/* Lips */}
+        <motion.path
+          d="M 60 112 Q 65 108, 70 112 Q 67 116, 60 112"
+          fill="hsl(0, 35%, 55%)" stroke="hsl(25, 50%, 30%)" strokeWidth="1" opacity={0.6}
+          animate={{ d: ["M 60 112 Q 65 108, 70 112 Q 67 116, 60 112", "M 60 112 Q 65 107, 70 112 Q 67 117, 60 112", "M 60 112 Q 65 108, 70 112 Q 67 116, 60 112"] }}
+          transition={{ duration: 5, repeat: Infinity }}
+        />
 
-          {/* Eyebrows */}
-          <motion.path
-            d="M 33 38 Q 42 32, 51 37"
-            fill="none" stroke="hsl(230 15% 40%)" strokeWidth="1.8" strokeLinecap="round" opacity={0.5}
-            animate={{ d: ["M 33 38 Q 42 32, 51 37", "M 33 36 Q 42 30, 51 35", "M 33 38 Q 42 32, 51 37"] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          />
-          <motion.path
-            d="M 69 37 Q 78 32, 87 38"
-            fill="none" stroke="hsl(230 15% 40%)" strokeWidth="1.8" strokeLinecap="round" opacity={0.5}
-            animate={{ d: ["M 69 37 Q 78 32, 87 38", "M 69 35 Q 78 30, 87 36", "M 69 37 Q 78 32, 87 38"] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 0.3 }}
-          />
+        {/* Beauty mark / freckles */}
+        <circle cx="56" cy="105" r="1.5" fill="hsl(25, 50%, 30%)" opacity={0.4} />
+        <circle cx="76" cy="88" r="1" fill="hsl(25, 50%, 30%)" opacity={0.3} />
 
-          {/* Rosy cheeks */}
-          <ellipse cx="30" cy="65" rx="8" ry="5" fill="hsl(340 40% 75%)" opacity={0.2} />
-          <ellipse cx="90" cy="65" rx="8" ry="5" fill="hsl(340 40% 75%)" opacity={0.2} />
-
-          {/* Nose */}
-          <path d="M 58 58 Q 60 64, 56 67" fill="none" stroke="hsl(230 15% 50%)" strokeWidth="1.2" strokeLinecap="round" opacity={0.35} />
-
-          {/* Gentle smile */}
-          <motion.path
-            d="M 45 78 Q 60 88, 75 78"
-            fill="none" stroke="hsl(230 15% 40%)" strokeWidth="2" strokeLinecap="round" opacity={0.5}
-            animate={{ d: ["M 45 78 Q 60 88, 75 78", "M 45 78 Q 60 90, 75 78", "M 45 78 Q 60 88, 75 78"] }}
-            transition={{ duration: 5, repeat: Infinity }}
-          />
-        </svg>
-      </div>
+        {/* Chin dimple */}
+        <path
+          d="M 55 125 Q 58 128, 61 125"
+          fill="none" stroke="hsl(25, 50%, 30%)" strokeWidth="1" strokeLinecap="round" opacity={0.3}
+        />
+      </motion.svg>
     </div>
   );
 };
