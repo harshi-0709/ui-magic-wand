@@ -80,23 +80,33 @@ const ArtisticSun = ({ size = 80, x = 50, y = 50 }: { size?: number; x?: number;
 const NightMoon = ({ x = 760, y = 90 }: { x?: number; y?: number }) => (
   <motion.g transform={`translate(${x}, ${y})`}>
     {/* Glow */}
-    <motion.circle r={50} fill="hsla(220, 30%, 80%, 0.15)"
-      animate={{ r: [50, 55, 50], opacity: [0.1, 0.2, 0.1] }}
+    <motion.circle r={50} fill="hsla(38, 70%, 55%, 0.1)"
+      animate={{ r: [50, 55, 50], opacity: [0.08, 0.15, 0.08] }}
       transition={{ duration: 5, repeat: Infinity }} />
-    {/* Moon body */}
-    <circle r={28} fill="hsl(220 20% 85%)" opacity={0.5} />
-    <circle r={25} fill="hsl(225 18% 80%)" opacity={0.4} />
-    {/* Craters */}
-    <circle cx={-8} cy={-6} r={4} fill="hsl(225 15% 72%)" opacity={0.25} />
-    <circle cx={10} cy={8} r={3} fill="hsl(225 15% 72%)" opacity={0.2} />
-    <circle cx={5} cy={-12} r={2} fill="hsl(225 15% 72%)" opacity={0.15} />
-    {/* Open eyes */}
-    <ellipse cx={-7} cy={-2} rx={2.5} ry={3} fill="hsl(230 20% 25%)" opacity={0.6} />
-    <circle cx={-6.5} cy={-3} r={1} fill="hsl(220 30% 90%)" opacity={0.8} />
-    <ellipse cx={7} cy={-2} rx={2.5} ry={3} fill="hsl(230 20% 25%)" opacity={0.6} />
-    <circle cx={7.5} cy={-3} r={1} fill="hsl(220 30% 90%)" opacity={0.8} />
-    {/* Smile */}
-    <path d="M -5 6 Q 0 10, 5 6" fill="none" stroke="hsl(230 15% 40%)" strokeWidth="1.2" strokeLinecap="round" opacity={0.4} />
+    <defs>
+      <mask id="nightCrescentMask">
+        <rect x={-40} y={-40} width={80} height={80} fill="white" />
+        <circle cx={12} cy={-8} r={22} fill="black" />
+      </mask>
+      <linearGradient id="nightMoonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="hsl(38, 75%, 60%)" />
+        <stop offset="100%" stopColor="hsl(30, 70%, 48%)" />
+      </linearGradient>
+    </defs>
+    {/* Crescent body */}
+    <circle r={28} fill="url(#nightMoonGrad)" mask="url(#nightCrescentMask)" />
+    <circle r={28} fill="none" stroke="hsl(25, 60%, 35%)" strokeWidth="0.8" mask="url(#nightCrescentMask)" />
+    {/* Closed eye with lashes */}
+    <motion.path d="M -12 -2 Q -8 -5, -4 -2" fill="none" stroke="hsl(25, 50%, 30%)" strokeWidth="1" strokeLinecap="round"
+      animate={{ d: ["M -12 -2 Q -8 -5, -4 -2", "M -12 -3 Q -8 -6, -4 -3", "M -12 -2 Q -8 -5, -4 -2"] }}
+      transition={{ duration: 4, repeat: Infinity }} />
+    <line x1={-11} y1={-2} x2={-13} y2={-5} stroke="hsl(25, 50%, 30%)" strokeWidth="0.6" strokeLinecap="round" />
+    <line x1={-8} y1={-4} x2={-9} y2={-7} stroke="hsl(25, 50%, 30%)" strokeWidth="0.6" strokeLinecap="round" />
+    <line x1={-5} y1={-2} x2={-3} y2={-5} stroke="hsl(25, 50%, 30%)" strokeWidth="0.6" strokeLinecap="round" />
+    {/* Nose */}
+    <path d="M -2 2 Q 2 6, 0 9 Q -2 10, -3 9" fill="none" stroke="hsl(25, 50%, 30%)" strokeWidth="0.8" strokeLinecap="round" />
+    {/* Lips */}
+    <path d="M -8 12 Q -5 10, -2 12 Q -5 14, -8 12" fill="hsl(0, 35%, 55%)" stroke="hsl(25, 50%, 30%)" strokeWidth="0.5" opacity={0.5} />
   </motion.g>
 );
 
